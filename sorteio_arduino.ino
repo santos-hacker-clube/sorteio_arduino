@@ -34,33 +34,39 @@ void setup() {
    pinMode(3,INPUT); 
    Serial.println("ARDUINO DAY Santos 2018 - Sorteio (SHC)");
    Serial.println("Aguardando pressionar botão....");
-   // set up the LCD's number of columns and rows:
+   // set up do LCD
     lcd.begin(0,1);
-
     lcd.setRGB(colorR, colorG, colorB);
     lcd.print("Pressione Botao...");
 
 }
 
 void loop() {
-   // print a random number from 0 to 299
-   bot = digitalRead(3);
+   /// captura a entrada do botão
+   /// 0 - botão pressionado
+   /// 1 - botão não pressionado
+   bot = digitalRead(3); 
    if(bot == 0 ) {
+       /// setup up do LCD
+       /// Aqui o código pode ser melhorado para não ter que inicializar o LCD
+       /// toda a vez que vou exibir algo nele
        lcd.begin(0,1);
        lcd.setRGB(colorR, colorG, colorB);
        lcd.print("Sorteando...");
-      for(int i=0; i<10;i++) {
+       /// for para causar suspense :D
+       for(int i=0; i<10;i++) {
           Serial.print(".");
           delay(300);
-      }
-      Serial.println();
-      Serial.println("E o grande vencedor é ");
-      
-      randNumber = random(1, val_max);// print a random number from 10 to 19
-      lcd.begin(0,1);
-      lcd.setRGB(colorR, colorG, colorB);
-      Serial.print(randNumber);
-      lcd.print(randNumber);
-   }  
-      
+       }
+       
+       Serial.println();
+       Serial.println("E o grande vencedor é ");
+
+       //Gera o número aleatório na faixa estipulado de 1 a val_max
+       randNumber = random(1, val_max);// print a random number from 10 to 19
+       lcd.begin(0,1);
+       lcd.setRGB(colorR, colorG, colorB);
+       Serial.print(randNumber);
+       lcd.print(randNumber);
+   }        
 }
